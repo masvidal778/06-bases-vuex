@@ -5,9 +5,9 @@ export default defineComponent({
   name: "CounterVuex",
   computed: {
     countComputed() {
-      return this.$store.state.count
+      return this.$store.state.counter.count
     },
-    ...mapState(["count", "lastMutation", "isLoading"])
+    ...mapState('counter', ["count", "lastMutation", "isLoading"])
     /*
     ...mapState({
       count: state => state.count,
@@ -18,13 +18,14 @@ export default defineComponent({
   },
   methods:{
     increment() {
-      this.$store.commit('increment')
+      this.$store.commit('counter/increment')
     },
     incrementBy(){
-      this.$store.commit('incrementBy', 5)
+      this.$store.commit('counter/incrementBy', 5)
       //this.randomInt()
     },
-    ...mapActions({
+    //...mapActions('counter',['incrementRandomInt'])
+    ...mapActions('counter', {
       randomInt: 'incrementRandomInt'
     })
   }
@@ -33,7 +34,7 @@ export default defineComponent({
 
 <template>
   <h1>Counter - Vuex</h1>
-  <h2>Direct access: {{ $store.state.count }}</h2>
+  <h2>Direct access: {{ $store.state.counter.count }}</h2>
   <h2>Computed: {{ countComputed }}</h2>
 
   <button @click="increment">+1</button>
@@ -44,5 +45,5 @@ export default defineComponent({
   <h2>mapState: {{ count }}</h2>
   <h2>lastMutation: {{ lastMutation }}</h2>
 
-  <h2>Direct getters: {{ $store.getters.squareCount }}</h2>
+  <h2>Direct getters: {{ $store.getters['counter/squareCount'] }}</h2>
 </template>
