@@ -1,6 +1,6 @@
 <script>
 import {defineComponent} from 'vue'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default defineComponent({
   name: "CounterVuex",
   computed: {
@@ -22,10 +22,11 @@ export default defineComponent({
     },
     incrementBy(){
       this.$store.commit('incrementBy', 5)
+      //this.randomInt()
     },
-    incrementRandomInt(){
-      this.$store.dispatch('incrementRandomInt')
-    }
+    ...mapActions({
+      randomInt: 'incrementRandomInt'
+    })
   }
 })
 </script>
@@ -40,5 +41,5 @@ export default defineComponent({
 
   <button @click="increment">+1</button>
   <button @click="incrementBy">+5</button>
-  <button @click="incrementRandomInt">Random</button>
+  <button @click="randomInt">Random</button>
 </template>
