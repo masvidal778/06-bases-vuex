@@ -7,7 +7,7 @@ export default defineComponent({
     countComputed() {
       return this.$store.state.count
     },
-    ...mapState(['count'])
+    ...mapState(['count', "lastMutation"])
     /*
     ...mapState({
       count: state => state.count,
@@ -15,6 +15,14 @@ export default defineComponent({
     })
 
      */
+  },
+  methods:{
+    increment() {
+      this.$store.commit('increment')
+    },
+    incrementBy(){
+      this.$store.commit('incrementBy', 5)
+    }
   }
 })
 </script>
@@ -25,5 +33,9 @@ export default defineComponent({
   <h2>Computed: {{ countComputed }}</h2>
   <h1>mapState</h1>
   <h2>mapState: {{ count }}</h2>
-  <!--<h2>lastMutation: {{ lastMutation }}</h2>-->
+  <h2>lastMutation: {{ lastMutation }}</h2>
+
+  <button @click="increment">+1</button>
+  <button @click="incrementBy">+5</button>
+  <button>Random</button>
 </template>
