@@ -7,7 +7,7 @@ export default defineComponent({
     countComputed() {
       return this.$store.state.count
     },
-    ...mapState(['count', "lastMutation"])
+    ...mapState(["count", "lastMutation", "isLoading"])
     /*
     ...mapState({
       count: state => state.count,
@@ -41,5 +41,5 @@ export default defineComponent({
 
   <button @click="increment">+1</button>
   <button @click="incrementBy">+5</button>
-  <button @click="randomInt">Random</button>
+  <button @click="randomInt" :disabled="isLoading">Random</button>
 </template>
